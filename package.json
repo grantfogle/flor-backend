@@ -1,0 +1,23 @@
+{
+  "name": "florbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grantfogle/flor-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grantfogle/flor-backend/issues"
+  },
+  "homepage": "https://github.com/grantfogle/flor-backend#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
