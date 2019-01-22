@@ -4,7 +4,11 @@ const port = process.env.PORT || 3001;
 const queries = require('./queries')
 //import bodyParser
 //cors
-//error handling
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+app.use(cors());
+app.use(bodyParser());
 
 app.get('/', (req, res) => {
     // res.send('It worked!')
