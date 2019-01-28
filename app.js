@@ -10,7 +10,6 @@ app.use(cors());
 app.use(bodyParser());
 
 app.get('/', (req, res) => {
-    // res.send('It worked!')
     queries.listAllWildflowers().then(wildflowers => res.send(wildflowers))
 })
 
@@ -18,15 +17,24 @@ app.get('/users/:id', (req, res) => {
     queries.getWildflowersByUser(req.params.id).then(usersflowers => res.send(usersflowers))
 })
 
-
-//login route
-app.post('/login', (req, res) => {
+app.post('/login', function (req, res) {
     const { username, password } = req.body;
-    return queries.getUser(username).
-})
+    console.log(bcrypt.hashSync(password, 10))
+    return queries.getUser(username)
+        .then(user => {
+            if (user.length === 0) {
+                return res.send('User not found')
+            }
+            return bcrypt.compare(password, user[0].password)
+                .then(isGood => {
+                    if (isGood) {
+                        return res.send(user)
+                    }
+                    return res.send('Password was not correct')
+                })
+        });
+});
 
-
-//signup route
 app.post('/signup', (req, res) => {
     const { username, password } = req.body;
     return queries.getUser(username).then(user => {
