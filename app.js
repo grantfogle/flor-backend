@@ -22,10 +22,26 @@ app.get('/users/:id', (req, res) => {
 //login route
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    return queries.getUser
+    return queries.getUser(username).
 })
 
 
 //signup route
+app.post('/signup', (req, res) => {
+    const { username, password } = req.body;
+    return queries.getUser(username).then(user => {
+        if (user.length > 0) {
+            return res.send("User already exists");
+        }
+        let hash = bcrypt.hashSync(password, 10);
+        let newUser = {
+            username,
+            password: hash
+        }
+        return queries.createUser(newUser).then(newUser => {
+            res.send({ response: newUser[0], message: "User created" })
+        })
+    })
+});
 
 app.listen(port, console.log(`Server running on ${port}`));

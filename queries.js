@@ -7,6 +7,9 @@ module.exports = {
     getUser(username) {
         return database('users').where('username', username);
     },
+    createUser(newUser) {
+        return db('users').insert(newUser).returning('*');
+    },
     getWildflowersByUser(id) {
         return database('userstoflowers')
             .select('wildflowers.name', 'wildflowers.family', 'wildflowers.description', 'wildflowers.image')
