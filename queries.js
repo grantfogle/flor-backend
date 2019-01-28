@@ -4,6 +4,9 @@ module.exports = {
     listAllWildflowers() {
         return database('wildflowers');
     },
+    getUser(username) {
+        return database('users').where('username', username);
+    },
     getWildflowersByUser(id) {
         return database('userstoflowers')
             .select('wildflowers.name', 'wildflowers.family', 'wildflowers.description', 'wildflowers.image')
