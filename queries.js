@@ -8,7 +8,10 @@ module.exports = {
         return database('users').where('username', username);
     },
     createUser(newUser) {
-        return db('users').insert(newUser).returning('*');
+        return database('users').insert(newUser).returning('*');
+    },
+    getAllUsers() {
+        return database('users');
     },
     getWildflowersByUser(id) {
         return database('userstoflowers')

@@ -12,6 +12,9 @@ app.use(bodyParser());
 app.get('/', (req, res) => {
     queries.listAllWildflowers().then(wildflowers => res.send(wildflowers))
 })
+app.get('/users', (req, res) => {
+    queries.getAllUsers().then(users => res.send(users))
+})
 
 app.get('/users/:id', (req, res) => {
     queries.getWildflowersByUser(req.params.id).then(usersflowers => res.send(usersflowers))
@@ -28,18 +31,19 @@ app.post('/login', function (req, res) {
             return bcrypt.compare(password, user[0].password)
                 .then(isGood => {
                     if (isGood) {
-                        return res.send(user)
+                        return res.send({ user, message: 'Correct' })
                     }
-                    return res.send('Password was not correct')
+                    return res.send({ message: 'username/password not correct' })
                 })
         });
 });
 
 app.post('/signup', (req, res) => {
     const { username, password } = req.body;
+    console.log(username, password)
     return queries.getUser(username).then(user => {
         if (user.length > 0) {
-            return res.send("User already exists");
+            return res.send("User already exists"); it
         }
         let hash = bcrypt.hashSync(password, 10);
         let newUser = {
