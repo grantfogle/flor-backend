@@ -25,7 +25,7 @@ app.post('/login', function (req, res) {
     return queries.getUser(username)
         .then(user => {
             if (user.length === 0) {
-                return res.send('User not found')
+                return res.send({ message: 'User not found' })
             }
             return bcrypt.compare(password, user[0].password)
                 .then(isGood => {
@@ -41,7 +41,7 @@ app.post('/signup', (req, res) => {
     const { username, password } = req.body;
     return queries.getUser(username).then(user => {
         if (user.length > 0) {
-            return res.send("User already exists"); it
+            return res.send({ message: "User already exists" }); it
         }
         let hash = bcrypt.hashSync(password, 10);
         let newUser = {
