@@ -22,7 +22,6 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/login', function (req, res) {
     const { username, password } = req.body;
-    console.log(bcrypt.hashSync(password, 10))
     return queries.getUser(username)
         .then(user => {
             if (user.length === 0) {
@@ -31,16 +30,15 @@ app.post('/login', function (req, res) {
             return bcrypt.compare(password, user[0].password)
                 .then(isGood => {
                     if (isGood) {
-                        return res.send({ user, message: 'Correct' })
+                        return res.send({ user, message: 'Authenticated' })
                     }
-                    return res.send({ message: 'username/password not correct' })
+                    return res.send({ message: 'Password is incorrect' })
                 })
         });
 });
 
 app.post('/signup', (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password)
     return queries.getUser(username).then(user => {
         if (user.length > 0) {
             return res.send("User already exists"); it
