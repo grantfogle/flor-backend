@@ -42,7 +42,7 @@ exports.seed = function (knex, Promise) {
           image: 'https://ak2.picdn.net/shutterstock/videos/4660382/thumb/1.jpg'
         },
         {
-          name: 'Alpine Forget-Me-Not',
+          name: 'Forget-Me-Not',
           family: 'Borage Family',
           description: 'Commonly found at high elevations mixed with lichen, sedum, polemonium and mountain rock. the woody base of the forget-me-not is built to stand the long, cold winters at these altitudes. Blooms late June to early July.',
           image: 'http://evergreen.expert/wp-content/uploads/2015/07/Alpine-forget-me-not.jpg'
